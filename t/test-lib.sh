@@ -166,9 +166,12 @@ then
 	# traced, unless it is run with a Bash version supporting
 	# BASH_XTRACEFD (introduced in Bash v4.1).
 	if test -n "$BASH_VERSION" && {
-	     test ${BASH_VERSINFO[0]} -gt 4 || {
-	       test ${BASH_VERSINFO[0]} -eq 4 &&
-	       test ${BASH_VERSINFO[1]} -ge 1
+	       bash_major=${BASH_VERSION%%.*}
+	       bash_minor=${BASH_VERSION#*.}
+	       bash_minor=${bash_minor%%.*}
+	       test $bash_major -gt 4 || {
+		 test $bash_major -eq 4 &&
+		 test $bash_minor -ge 1
 	     }
 	   }
 	then
